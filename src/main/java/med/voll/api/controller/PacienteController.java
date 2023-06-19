@@ -38,6 +38,12 @@ public class PacienteController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoPaciente> detalhar(@PathVariable Long id){
+        var paciente = pacienteRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<DadosDetalhamentoPaciente> cadastrar(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriComponentsBuilder) {
